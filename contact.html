@@ -4,19 +4,171 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>인터넷활용 실습 템플릿</title>
-  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* 1. 기본 여백 초기화 및 부드러운 글꼴 설정 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Malgun Gothic', sans-serif;
+      background-color: #f0f2f5; /* 깔끔한 연회색 배경 */
+      color: #333333;
+      line-height: 1.6;
+    }
+
+    /* 2. 상단 헤더 (이름 영역) */
+    header {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed); /* 트렌디한 보라색 그라데이션 */
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    header .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+
+    /* 3. 네비게이션 메뉴 바 스타일링 */
+    nav {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: #4b5563;
+      text-decoration: none;
+      padding: 16px 24px;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    nav a:hover {
+      color: #4f46e5;
+      background-color: #f3f4f6;
+    }
+
+    /* 4. 메인 컨텐츠 감싸는 상자 */
+    .container {
+      max-width: 650px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* 5. 사용자가 요청한 section 디자인 */
+    section {
+      background-color: #ffffff;
+      padding: 35px;
+      border-radius: 16px; /* 모서리를 둥글게 */
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
+    }
+    section h2 {
+      color: #1f2937;
+      border-left: 5px solid #4f46e5; /* 제목 왼쪽에 예쁜 보라색 세로선 추가 */
+      padding-left: 12px;
+      margin-bottom: 25px;
+      font-size: 1.5rem;
+    }
+    
+    /* 연락처 리스트 (<ul>, <li>) 스타일링 */
+    section ul {
+      list-style-type: none; /* 기본 점 제거 */
+      background-color: #f8fafc; /* 리스트 영역 연한 배경 */
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 30px;
+    }
+    section li {
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+      color: #4b5563;
+    }
+    section li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 6. Contact Form (입력 폼) 디자인 */
+    .contact-form {
+      display: flex;
+      flex-direction: column; /* 세로로 나열 */
+    }
+    .contact-form label {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      transition: all 0.2s ease;
+      background-color: #f9fafb;
+    }
+    /* 입력창을 클릭(포커스)했을 때 효과 */
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #4f46e5;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+    /* 보내기 버튼 스타일 */
+    .contact-form button {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      border: none;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      margin-top: 5px;
+    }
+    .contact-form button:hover {
+      opacity: 0.9; /* 마우스 올리면 살짝 연해지는 효과 */
+    }
+
+    /* 7. 하단 푸터 (하단 이름 영역) */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #9ca3af;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
+
 <header>
   <h1> Seung Jae LEE</h1>
-  <p class="subtitle">한 줄 소개: 반갑습니다. </p>
+  <p class="subtitle">반갑습니다. </p>
 </header>
+
 <nav>
   <a href="index.html">Home</a>
   <a href="about.html">About</a>
   <a href="portfolio.html">Portfolio</a>
   <a href="contact.html">Contact</a>
 </nav>
+
 <main class="container">
 <section>
   <h2>Contact</h2>
@@ -25,7 +177,6 @@
     <li>GitHub: lsjae07</li>
     <li>기타 링크(블로그/노션 등): (여기에 추가)</li>
   </ul>
-  <!-- 아래는 정말 기본 예시 폼입니다. JS 없이도 동작하지 않아도 되며, 형태만 제공합니다. -->
   <form class="contact-form" onsubmit="return false;">
     <label>이름</label>
     <input type="text" placeholder="이름을 입력하세요">
@@ -35,9 +186,11 @@
   </form>
 </section>
 </main>
+
 <footer>
   <small>&copy; <span id="year"></span> 이름: 이승재</small>
 </footer>
+
 <script src="script.js"></script>
 </body>
 </html>
