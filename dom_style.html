@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습 1: DOM 스타일 변환기</title>
+
+    <style>
+        /* 1. 기본 초기화 및 부드러운 배경 설정 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background-color: #f0f2f5;
+            /* 깔끔한 연회색 배경 */
+            color: #333333;
+            line-height: 1.6;
+            padding: 50px 20px;
+        }
+
+        /* 2. 전체 콘텐츠를 감싸는 중앙 카드 상자 */
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* 3. 상단 미니 배너 영역 */
+        .card-header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            /* 메인 테마 보라색 그라데이션 */
+            padding: 30px 35px;
+            color: white;
+            text-align: left;
+        }
+
+        .card-header h3 {
+            font-size: 1.4rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .card-header p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.9rem;
+        }
+
+        /* 4. 내부 실제 콘텐츠 구역 */
+        .card-body {
+            padding: 40px 35px;
+            text-align: center;
+        }
+
+        /* 5. 타겟 문장 상자 디자인 */
+        #target {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 25px;
+            border: 2px solid #e5e7eb;
+            background-color: #f8fafc;
+            border-radius: 12px;
+            margin: 10px auto 30px auto;
+            width: 100%;
+            transition: all 0.3s ease;
+            /* 색상 변경 시 부드럽게 변하도록 조정 */
+            word-break: keep-all;
+        }
+
+        /* [새로 추가] 6. 사용자가 직접 고르는 컬러 피커 영역 */
+        .color-picker-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            background-color: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px dashed #ced4da;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .picker-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #4b5563;
+        }
+
+        /* 실글 입력을 위한 color 인풋 세련되게 다듬기 */
+        .picker-item input[type="color"] {
+            -webkit-appearance: none;
+            appearance: none;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            /* 동그란 버튼 모양 */
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .picker-item input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        .picker-item input[type="color"]::-webkit-color-swatch {
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+        }
+
+        /* 7. 버튼 레이아웃 구조화 */
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        button {
+            padding: 14px 20px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: #4b5563;
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        button:hover {
+            color: #4f46e5;
+            border-color: #4f46e5;
+            background-color: #f5f3ff;
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .btn-toggle {
+            background-color: #f9fafb;
+        }
+
+        /* 원래대로 되돌리는 초기화 버튼 */
+        .btn-reset {
+            grid-column: span 2;
+            background: linear-gradient(135deg, #374151, #1f2937);
+            color: white;
+            border: none;
+            margin-top: 5px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-reset:hover {
+            color: white;
+            background: linear-gradient(135deg, #4b5563, #374151);
+        }
+    </style>
+
+    <script>
+        // 1. 기존 글자색 변경 함수 (원래 기능 유지)
+        function changeColor() {
+            var obj = document.getElementById("target");
+            obj.style.color = "#ef4444";
+        }
+
+        // 2. 기존 글자 크기 변경 함수
+        function changeSize() {
+            var obj = document.getElementById("target");
+            obj.style.fontSize = "32px";
+        }
+
+        // 3. 기존 배경색 변경 함수
+        function changeBackground() {
+            var obj = document.getElementById("target");
+            obj.style.backgroundColor = "#fef08a";
+        }
+
+        // 4. 기존 숨기기/보이기 토글 함수
+        function toggleVisibility() {
+            var obj = document.getElementById("target");
+            if (obj.style.display === "none") {
+                obj.style.display = "block";
+            } else {
+                obj.style.display = "none";
+            }
+        }
+
+        // [신규 기능 1] 사용자가 직접 고른 글자 색상 적용하기
+        function customTextColor(picker) {
+            var obj = document.getElementById("target");
+            obj.style.color = picker.value; // 선택한 색상 값(#000000 형태)을 투입
+        }
+
+        // [신규 기능 2] 사용자가 직접 고른 박스 배경 색상 적용하기
+        function customBgColor(picker) {
+            var obj = document.getElementById("target");
+            obj.style.backgroundColor = picker.value;
+        }
+
+        // 5. 스타일 원상복구 초기화 함수 (컬러 피커도 초기색으로 리셋)
+        function resetStyle() {
+            var obj = document.getElementById("target");
+            obj.style.color = "";
+            obj.style.fontSize = "";
+            obj.style.backgroundColor = "";
+            obj.style.display = "block";
+
+            // 컬러 피커 입력창도 기본값으로 되돌리기
+            document.getElementById("textColorPicker").value = "#333333";
+            document.getElementById("bgColorPicker").value = "#f8fafc";
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card-header">
+            <h3>실습 1: DOM 스타일 제어하기</h3>
+            <p>기존 프리셋 버튼을 누르거나, 컬러 선택창을 통해 원하는 색을 직접 지정해 보세요.</p>
+        </div>
+
+        <div class="card-body">
+            <p id="target">이 문장의 스타일을 바꿔보세요!</p>
+
+            <div class="color-picker-group">
+                <div class="picker-item">
+                    <label>🔤 글자색 선택 :</label>
+                    <input type="color" id="textColorPicker" value="#333333" oninput="customTextColor(this)">
+                </div>
+                <div class="picker-item">
+                    <label>🖼️ 배경색 선택 :</label>
+                    <input type="color" id="bgColorPicker" value="#f8fafc" oninput="customBgColor(this)">
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button onclick="changeColor()">🎨 기본 레드 변환</button>
+                <button onclick="changeSize()">🔍 크게 보기</button>
+                <button onclick="changeBackground()">✨ 기본 옐로우 강조</button>
+                <button onclick="toggleVisibility()" class="btn-toggle">👁️ 숨기기/보이기</button>
+
+                <button onclick="resetStyle()" class="btn-reset">🔄 스타일 초기화 (원래대로)</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

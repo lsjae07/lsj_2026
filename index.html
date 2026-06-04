@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>인터넷활용 실습 템플릿</title>
-  
+
   <!-- 내부 스타일시트 (이곳에서 전체적인 디자인을 꾸밉니다) -->
   <style>
     /* 1. 기본 여백 초기화 및 부드러운 글꼴 설정 */
@@ -13,25 +14,30 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Malgun Gothic', sans-serif;
-      background-color: #f0f2f5; /* 깔끔한 연회색 배경 */
+      background-color: #f0f2f5;
+      /* 깔끔한 연회색 배경 */
       color: #333333;
       line-height: 1.6;
     }
 
     /* 2. 상단 헤더 (이름 영역) */
     header {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed); /* 트렌디한 보라색 그라데이션 */
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      /* 트렌디한 보라색 그라데이션 */
       color: white;
       text-align: center;
       padding: 50px 20px;
     }
+
     header h1 {
       font-size: 2.5rem;
       letter-spacing: 2px;
       margin-bottom: 10px;
     }
+
     header .subtitle {
       font-size: 1.1rem;
       opacity: 0.85;
@@ -47,6 +53,7 @@
       top: 0;
       z-index: 100;
     }
+
     nav a {
       color: #4b5563;
       text-decoration: none;
@@ -54,6 +61,7 @@
       font-weight: bold;
       transition: all 0.2s ease;
     }
+
     nav a:hover {
       color: #4f46e5;
       background-color: #f3f4f6;
@@ -70,40 +78,52 @@
     section {
       background-color: #ffffff;
       padding: 35px;
-      border-radius: 16px; /* 모서리를 둥글게 */
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
+      border-radius: 16px;
+      /* 모서리를 둥글게 */
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+      /* 부드러운 그림자 */
     }
+
     section h2 {
       color: #1f2937;
-      border-left: 5px solid #4f46e5; /* 제목 왼쪽에 예쁜 보라색 세로선 추가 */
+      border-left: 5px solid #4f46e5;
+      /* 제목 왼쪽에 예쁜 보라색 세로선 추가 */
       padding-left: 12px;
       margin-bottom: 20px;
       font-size: 1.5rem;
     }
-    
+
     /* section 내부의 자기소개 글과 리스트 간격 조절 */
     section p {
       font-size: 1.1rem;
       color: #4b5563;
       margin-bottom: 20px;
     }
+
     section ul {
-      list-style-type: none; /* 기본 점을 없애고 깔끔하게 정렬 */
-      background-color: #f8fafc; /* 리스트 영역 배경 깔아주기 */
+      list-style-type: none;
+      /* 기본 점을 없애고 깔끔하게 정렬 */
+      background-color: #f8fafc;
+      /* 리스트 영역 배경 깔아주기 */
       padding: 20px;
       border-radius: 8px;
       border: 1px solid #e2e8f0;
     }
+
     section li {
       margin-bottom: 12px;
       font-size: 0.95rem;
       color: #334155;
     }
+
     section li:last-child {
-      margin-bottom: 0; /* 마지막 항목은 여백 제외 */
+      margin-bottom: 0;
+      /* 마지막 항목은 여백 제외 */
     }
+
     section strong {
-      color: #4f46e5; /* 이름 강조 */
+      color: #4f46e5;
+      /* 이름 강조 */
     }
 
     /* 6. 하단 푸터 (하단 이름 영역) */
@@ -115,37 +135,39 @@
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h1> Seung Jae LEE </h1>
-  <p class="subtitle">반갑습니다. </p>
-</header>
+  <header>
+    <h1> Seung Jae LEE </h1>
+    <p class="subtitle">반갑습니다. </p>
+  </header>
 
-<!-- 요구하신 대로 nav와 section 내부는 기존 태그 및 텍스트를 그대로 유지했습니다 -->
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="portfolio.html">Portfolio</a>
-  <a href="contact.html">Contact</a>
-</nav>
+  <!-- 요구하신 대로 nav와 section 내부는 기존 태그 및 텍스트를 그대로 유지했습니다 -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 
-<main class="container">
-<section>
-  <h2>홈</h2>
-  <p>안녕하세요! 저는 <strong>이름:이승재</strong> 입니다.</p>
-  <ul>
-    <li>학과/학번: 컴퓨터정보공학부/2026402063</li>
-    <li>관심 분야: 컴퓨터, 인공지능</li>
-    <li>기술 스택(예: HTML, CSS, JS): C, HTML, CSS, JS </li>
-  </ul>
-</section>
-</main>
+  <main class="container">
+    <section>
+      <h2>홈</h2>
+      <p>안녕하세요! 저는 <strong>이름:이승재</strong> 입니다.</p>
+      <ul>
+        <li>학과/학번: 컴퓨터정보공학부/2026402063</li>
+        <li>관심 분야: 컴퓨터, 인공지능</li>
+        <li>기술 스택(예: HTML, CSS, JS): C, HTML, CSS, JS </li>
+      </ul>
+    </section>
+  </main>
 
-<footer>
-  <small>&copy; <span id="year"></span> 이름: 이승재</small>
-</footer>
+  <footer>
+    <small>&copy; <span id="year"></span> 이름: 이승재</small>
+  </footer>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>

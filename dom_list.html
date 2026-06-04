@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습 2: 댓글 추가/삭제</title>
+
+    <style>
+        /* 1. 기본 초기화 및 부드러운 배경 설정 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background-color: #f0f2f5;
+            /* 깔끔한 연회색 배경 */
+            color: #333333;
+            line-height: 1.6;
+            padding: 50px 20px;
+            /* 상하 여백을 늘려 안정감 부여 */
+        }
+
+        /* 2. 전체 콘텐츠를 감싸는 중앙 카드 상자 */
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 20px;
+            /* 모서리를 조금 더 부드럽게 */
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.08);
+            /* 그림자를 조금 더 선명하게 */
+            overflow: hidden;
+            /* 헤더 그라데이션이 모서리를 벗어나지 않게 */
+        }
+
+        /* 3. [추가] 상단 미니 배너 영역 - 여백 보완 및 메인 사이트와 세트 느낌 강조 */
+        .card-header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            /* 메인 테마 보라색 그라데이션 */
+            padding: 30px 35px;
+            color: white;
+        }
+
+        .card-header h3 {
+            font-size: 1.4rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .card-header p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.9rem;
+        }
+
+        /* 4. 내부 실제 콘텐츠 배치 구역 */
+        .card-body {
+            padding: 40px 35px;
+        }
+
+        /* [추가] 댓글 목록 위 가이드 대시보드 박스 - 빈 공간을 채워주는 역할 */
+        .info-board {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 25px;
+            font-size: 0.88rem;
+            color: #6b7280;
+        }
+
+        .info-board ul {
+            list-style: none;
+            padding-left: 5px;
+        }
+
+        .info-board li {
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-board li::before {
+            content: "✓";
+            color: #4f46e5;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* 5. 댓글 추가 버튼 (보라색 입체형 버튼) */
+        button {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.1s ease, opacity 0.2s ease;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+
+        button:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+            /* 클릭했을 때 꾹 눌리는 느낌 */
+        }
+
+        /* 6. 댓글 목록 (ul, li) 스타일링 */
+        #commentList {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        /* 자바스크립트로 추가되는 li 태그의 디자인 */
+        #commentList li {
+            background-color: #ffffff;
+            margin-top: 12px;
+            padding: 18px;
+            /* 안쪽 여백을 넓혀서 글자가 꽉 차보이게 조절 */
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.98rem;
+            color: #374151;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        /* 마우스 올리면 삭제 경고 (더 부드럽고 꽉 찬 피드백) */
+        #commentList li:hover {
+            background-color: #fef2f2;
+            border-color: #fca5a5;
+            transform: translateX(4px);
+            /* 오른쪽으로 살짝 밀리는 세련된 모션 */
+        }
+
+        /* 클릭 시 삭제 안내 툴팁 효과 */
+        #commentList li:hover::after {
+            content: "✕ 삭제";
+            color: #ef4444;
+            font-size: 0.85em;
+            font-weight: bold;
+            background-color: #fee2e2;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+    </style>
+
+    <script>
+        // 댓글 추가 함수 (기존 로직 100% 동일, 글자 하나 바꾸지 않았습니다)
+        function addComment() {
+            // 1. 사용자 입력 받기
+            var inputStr = prompt("추가할 댓글 내용을 입력하세요:", "오늘 수업 너무 재밌어요!");
+
+            // 취소 버튼을 누르거나 내용이 없으면 종료
+            if (inputStr == null || inputStr.trim() == "") {
+                return;
+            }
+
+            // 2. 부모 요소(ul) 찾기
+            var parent = document.getElementById("commentList");
+
+            // 3. 새로운 요소(li) 생성 및 내용 채우기
+            var newLi = document.createElement("li");
+            newLi.innerHTML = inputStr;
+
+            // 4. 클릭 시 삭제되는 이벤트 리스너 등록 (핵심!)
+            newLi.onclick = function () {
+                // this는 클릭된 자기 자신(li)을 의미함
+                var p = this.parentElement; // 부모(ul) 찾기
+                p.removeChild(this);        // 부모에게서 나를 떼어내기(삭제)
+            };
+
+            // 5. 트리에 추가 (Append)
+            parent.appendChild(newLi);
+        }
+    </script>
+</head>
+
+<body onload="addComment()">
+    <div class="container">
+        <div class="card-header">
+            <h3>실습 2: 댓글 추가/삭제 프로그램</h3>
+            <p>JavaScript DOM 조작을 활용한 동적 리스트 제어 실습</p>
+        </div>
+
+        <div class="card-body">
+            <div class="info-board">
+                <ul>
+                    <li>상단의 버튼을 누르면 새로운 대화 상자(Prompt)가 나타납니다.</li>
+                    <li>등록된 댓글 위에 마우스를 올린 후 클릭하면 목록에서 실시간으로 삭제됩니다.</li>
+                </ul>
+            </div>
+
+            <button onclick="addComment()">+ 새로운 댓글 등록하기</button>
+
+            <ul id="commentList">
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>

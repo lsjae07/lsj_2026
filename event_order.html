@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습 1: 스마트 피자 주문서</title>
+
+    <style>
+        /* 1. 기본 초기화 및 부드러운 배경 설정 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background-color: #f0f2f5;
+            /* 깔끔한 연회색 전체 배경 */
+            color: #333333;
+            line-height: 1.6;
+            padding: 50px 20px;
+        }
+
+        /* 2. 전체 콘텐츠를 감싸는 중앙 카드 상자 */
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* 3. 상단 미니 배너 영역 - 사이트 패키지 통일감 */
+        .card-header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            /* 메인 테마 보라색 그라데이션 */
+            padding: 30px 35px;
+            color: white;
+        }
+
+        .card-header h3 {
+            font-size: 1.4rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        /* 4. 내부 실제 컨텐츠 구역 */
+        .card-body {
+            padding: 40px 35px;
+        }
+
+        /* 5. 메뉴 선택 박스 디자인 (기존 #menu_box 구조 개선) */
+        #menu_box {
+            border: 1px solid #e5e7eb;
+            background-color: #f8fafc;
+            /* 부드러운 배경색 배치 */
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+        }
+
+        #menu_box h4 {
+            color: #1f2937;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        /* 개별 메뉴 행 레이아웃 */
+        .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* 체크박스와 수량 인풋을 양 끝으로 정렬 */
+            padding: 10px 0;
+            border-bottom: 1px dashed #e5e7eb;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+            /* 마지막 줄은 테두리 생략 */
+        }
+
+        /* 체크박스 및 수량 입력창 세련되게 다듬기 */
+        .menu-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: #4b5563;
+        }
+
+        .menu-check {
+            width: 16px;
+            height: 16px;
+            accent-color: #4f46e5;
+            /* 체크박스 포인트를 메인 보라색으로 지정 */
+            cursor: pointer;
+        }
+
+        /* 수량 조절 테두리 정돈 */
+        .menu-qty-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .menu-qty {
+            padding: 6px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            outline: none;
+            text-align: center;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        .menu-qty:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        /* 6. 입력 양식 필드 그룹 (배달 주소, 주문 합계 영역) */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 0.95rem;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        /* 일반 텍스트 입력창 */
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        /* 합계 금액창 특수 디자인 (가독성 향상) */
+        .total-wrapper {
+            background-color: #f5f3ff;
+            border: 1px solid #c7d2fe;
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 25px 0;
+        }
+
+        .total-wrapper span {
+            font-weight: bold;
+            color: #4f46e5;
+            font-size: 1.1rem;
+        }
+
+        #total {
+            background: transparent;
+            border: none;
+            text-align: right;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #4f46e5;
+            width: 140px;
+            outline: none;
+            padding-right: 5px;
+        }
+
+        /* 7. 전송 및 리셋 버튼 배치 */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            /* 주문하기 버튼을 더 넓게 배치 */
+            gap: 10px;
+        }
+
+        input[type="submit"],
+        input[type="reset"] {
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+
+        input[type="submit"]:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+
+        input[type="reset"] {
+            background-color: #e5e7eb;
+            color: #4b5563;
+        }
+
+        input[type="reset"]:hover {
+            background-color: #d1d5db;
+        }
+    </style>
+
+    <script>
+        /* 기능 1: 가격 계산 함수 (로직 변경 없음) */
+        function recalc() {
+            var total = 0;
+            var checks = document.getElementsByClassName("menu-check");
+            var qtys = document.getElementsByClassName("menu-qty");
+
+            for (var i = 0; i < checks.length; i++) {
+                if (checks[i].checked) {
+                    var price = parseInt(checks[i].value);
+                    var quantity = parseInt(qtys[i].value);
+
+                    if (isNaN(quantity) || quantity < 1) {
+                        quantity = 1;
+                    }
+                    total += price * quantity;
+                }
+            }
+            document.getElementById("total").value = total;
+        }
+
+        /* 기능 2: 주소 입력 확인 */
+        function checkAddress() {
+            var addr = document.getElementById("addr");
+            if (addr.value == "") {
+                alert("배달 받으실 주소를 반드시 입력해주세요!");
+                addr.focus();
+            }
+        }
+
+        /* 기능 3: 주문 전송 제어 */
+        function validate(e) {
+            var total = parseInt(document.getElementById("total").value);
+
+            if (total == 0) {
+                alert("상품을 적어도 하나는 선택해야 주문 가능합니다.");
+                e.preventDefault();
+                return false;
+            }
+
+            alert("주문이 완료되었습니다! (총 결제금액: " + total + "원)");
+            e.preventDefault();
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card-header">
+            <h3>🍕 피자 주문서 (이벤트 활용)</h3>
+        </div>
+
+        <div class="card-body">
+            <form action="#" onsubmit="return validate(event)">
+
+                <div id="menu_box">
+                    <h4>[메뉴 선택]</h4>
+
+                    <div class="menu-item">
+                        <label class="menu-label">
+                            <input type="checkbox" class="menu-check" value="15000" onchange="recalc()"> 콤비네이션 피자
+                            (15,000원)
+                        </label>
+                        <div class="menu-qty-container">
+                            <input type="number" class="menu-qty" value="1" min="1" style="width: 50px;"
+                                onchange="recalc()" onkeyup="recalc()"> 개
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <label class="menu-label">
+                            <input type="checkbox" class="menu-check" value="12000" onchange="recalc()"> 페퍼로니 피자
+                            (12,000원)
+                        </label>
+                        <div class="menu-qty-container">
+                            <input type="number" class="menu-qty" value="1" min="1" style="width: 50px;"
+                                onchange="recalc()" onkeyup="recalc()"> 개
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <label class="menu-label">
+                            <input type="checkbox" class="menu-check" value="2000" onchange="recalc()"> 치즈 토핑 추가
+                            (2,000원)
+                        </label>
+                        <div class="menu-qty-container">
+                            <input type="number" class="menu-qty" value="1" min="1" style="width: 50px;"
+                                onchange="recalc()" onkeyup="recalc()"> 개
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <label class="menu-label">
+                            <input type="checkbox" class="menu-check" value="1500" onchange="recalc()"> 콜라 1.25L
+                            (1,500원)
+                        </label>
+                        <div class="menu-qty-container">
+                            <input type="number" class="menu-qty" value="1" min="1" style="width: 50px;"
+                                onchange="recalc()" onkeyup="recalc()"> 개
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="addr">🛵 배달 주소 :</label>
+                    <input type="text" id="addr" onblur="checkAddress()" placeholder="배달받으실 주소를 정확히 입력하세요">
+                </div>
+
+                <div class="total-wrapper">
+                    <span>💵 총 결제 금액</span>
+                    <div>
+                        <input type="text" id="total" value="0" readonly>
+                        <span style="font-size: 1.2rem; font-weight: bold; color: #4f46e5;">원</span>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <input type="submit" value="주문하기">
+                    <input type="reset" value="초기화" onclick="setTimeout(recalc, 0)">
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

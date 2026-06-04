@@ -1,91 +1,195 @@
 /* =============================================================
-   색상 테마는 "여기"에서 바꿉니다. (파랑 계열 기본)
-   원하는 색상 코드로 아래 4가지만 바꿔보세요.
+   색상 테마는 "여기"에서 바꿉니다. 
+   우리가 맞춘 트렌디한 보라-블루 그라데이션 및 파스텔 톤 계열로 튜닝했습니다.
    ------------------------------------------------------------- */
 :root {
-  --primary: #1e5bb8;      /* 메인 포인트 색상 */
-  --primary-dark: #194c98; /* 호버/진한 포인트 */
-  --bg: #f7f9fc;           /* 전체 배경 색 */
-  --text: #222222;         /* 본문 글자 색 */
+  --primary: #4f46e5;
+  /* 메인 포인트 보라색 */
+  --primary-dark: #7c3aed;
+  /* 호버 / 진한 포인트 자줏빛 보라 */
+  --bg: #f0f2f5;
+  /* 부드럽고 깔끔한 연회색 전체 배경 */
+  --text: #333333;
+  /* 눈이 편안한 진한 회색 본문 글자 */
+
+  /* [추가] 그라데이션을 위한 서브 컬러 세팅 */
+  --gradient: linear-gradient(135deg, #4f46e5, #7c3aed);
 }
+
 /* ============================================================= */
 
-* { box-sizing: border-box; }
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+  padding: 0;
+}
+
+body {
+  font-family: 'Malgun Gothic', system-ui, -apple-system, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
 }
 
+/* 1. 상단 헤더 영역 - 예쁜 그라데이션 배너 스타일 */
 header {
-  padding: 2rem 1rem;
+  background: var(--gradient);
+  /* 지정한 보라색 그라데이션 자동 적용 */
+  color: #ffffff;
+  padding: 50px 20px;
   text-align: center;
-  background: var(--primary);
-  color: #ffffff;
 }
-header .subtitle { margin-top: .25rem; opacity: .95; }
 
+header h1 {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+header .subtitle {
+  font-size: 1.1rem;
+  opacity: .85;
+}
+
+/* 2. 네비게이션 메뉴 바 스타일링 - 스티키 락 기능 추가 */
 nav {
-  background: var(--primary-dark);
-  display: flex;
-  gap: 1rem;
-  padding: .75rem 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-nav a {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 600;
-  padding: .25rem .5rem;
-}
-nav a:hover { text-decoration: underline; }
-
-.container {
-  max-width: 900px;
-  margin: 1.5rem auto;
-  padding: 1rem;
   background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  /* 메뉴바를 흰색으로 바꾸어 트렌디하게 변경 */
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  /* 바닥 그림자 */
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-section { margin-bottom: 1rem; }
-h1, h2, h3 { margin: .2rem 0 .6rem; }
+nav a {
+  color: #4b5563;
+  /* 글자색을 차분한 회색으로 변경 */
+  text-decoration: none;
+  font-weight: bold;
+  padding: 16px 24px;
+  transition: all 0.2s ease;
+}
 
+nav a:hover {
+  color: var(--primary);
+  /* 마우스 올리면 보라색으로 변신 */
+  background-color: #f3f4f6;
+  /* 살짝 감도는 배경색 */
+  text-decoration: none;
+}
+
+/* 3. 메인 컨텐츠를 감싸는 중앙 카드 상자 정밀 튜닝 */
+.container {
+  max-width: 680px;
+  /* 가독성이 가장 좋은 본문 너비 */
+  margin: 40px auto;
+  padding: 35px;
+  background: #ffffff;
+  border-radius: 16px;
+  /* 모서리를 둥글게 */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  /* 부드럽고 고급진 그림자 */
+}
+
+/* 4. 섹션 내부의 타이틀과 가이드라인 디자인 */
+section {
+  margin-bottom: 1rem;
+}
+
+h1,
+h2,
+h3 {
+  color: #1f2937;
+  margin-bottom: 15px;
+}
+
+section h2 {
+  font-size: 1.5rem;
+  border-left: 5px solid var(--primary);
+  /* 제목 왼쪽에 예쁜 보라색 세로선 자동 생성 */
+  padding-left: 12px;
+}
+
+/* 5. 폼 양식 (Contact Form 등) 입력창 고급화 */
 .contact-form {
   display: grid;
   grid-template-columns: 1fr;
-  gap: .5rem;
-  margin-top: 1rem;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
-input, textarea {
+
+input,
+textarea {
   width: 100%;
-  padding: .6rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
   font: inherit;
+  font-size: 0.95rem;
+  background-color: #f9fafb;
+  transition: all 0.2s ease;
 }
+
+/* 입력창 클릭(포커스) 효과 */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* 6. 입체적인 그라데이션 버튼 디자인 */
 button {
-  padding: .6rem .8rem;
+  padding: 14px 20px;
   border: none;
-  border-radius: 6px;
-  background: var(--primary);
+  border-radius: 8px;
+  background: var(--gradient);
+  /* 버튼에도 그라데이션 적용 */
   color: #fff;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
 }
-button:hover { background: var(--primary-dark); }
 
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  /* 마우스 올리면 미세하게 들림 */
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+/* 7. 하단 푸터 영역 스타일 */
 footer {
   text-align: center;
-  padding: 2rem 1rem;
-  color: #666;
+  padding: 40px 20px;
+  color: #9ca3af;
+  font-size: 0.9rem;
 }
 
+/* 8. 스마트폰 등 모바일 화면 최적화 (반응형 코드 유지) */
 @media (max-width: 600px) {
-  header h1 { font-size: 1.25rem; }
-  .container { margin: 1rem; padding: .75rem; }
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .container {
+    margin: 20px 15px;
+    padding: 25px;
+  }
+
+  nav a {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
 }

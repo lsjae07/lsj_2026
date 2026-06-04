@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>인터넷활용 실습 템플릿</title>
-  
+
   <style>
     /* 1. 기본 여백 초기화 및 부드러운 글꼴 설정 */
     * {
@@ -12,25 +13,30 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Malgun Gothic', sans-serif;
-      background-color: #f0f2f5; /* 깔끔한 연회색 배경 */
+      background-color: #f0f2f5;
+      /* 깔끔한 연회색 배경 */
       color: #333333;
       line-height: 1.6;
     }
 
     /* 2. 상단 헤더 (이름 영역) */
     header {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed); /* 트렌디한 보라색 그라데이션 */
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      /* 트렌디한 보라색 그라데이션 */
       color: white;
       text-align: center;
       padding: 50px 20px;
     }
+
     header h1 {
       font-size: 2.5rem;
       letter-spacing: 2px;
       margin-bottom: 10px;
     }
+
     header .subtitle {
       font-size: 1.1rem;
       opacity: 0.85;
@@ -46,6 +52,7 @@
       top: 0;
       z-index: 100;
     }
+
     nav a {
       color: #4b5563;
       text-decoration: none;
@@ -53,6 +60,7 @@
       font-weight: bold;
       transition: all 0.2s ease;
     }
+
     nav a:hover {
       color: #4f46e5;
       background-color: #f3f4f6;
@@ -69,17 +77,21 @@
     section {
       background-color: #ffffff;
       padding: 35px;
-      border-radius: 16px; /* 모서리를 둥글게 */
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
+      border-radius: 16px;
+      /* 모서리를 둥글게 */
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+      /* 부드러운 그림자 */
     }
+
     section h2 {
       color: #1f2937;
-      border-left: 5px solid #4f46e5; /* 제목 왼쪽에 예쁜 보라색 세로선 추가 */
+      border-left: 5px solid #4f46e5;
+      /* 제목 왼쪽에 예쁜 보라색 세로선 추가 */
       padding-left: 12px;
       margin-bottom: 15px;
       font-size: 1.5rem;
     }
-    
+
     /* 포트폴리오 상단 안내 글자 */
     section p {
       font-size: 1rem;
@@ -89,10 +101,13 @@
 
     /* 프로젝트 리스트 (<ol>, <li>) 스타일링 */
     section ol {
-      list-style-position: inside; /* 번호가 박스 안쪽에 예쁘게 배치되도록 */
+      list-style-position: inside;
+      /* 번호가 박스 안쪽에 예쁘게 배치되도록 */
     }
+
     section li {
-      background-color: #f8fafc; /* 각 프로젝트 항목에 연한 배경색 부여 */
+      background-color: #f8fafc;
+      /* 각 프로젝트 항목에 연한 배경색 부여 */
       border: 1px solid #e2e8f0;
       padding: 20px;
       border-radius: 12px;
@@ -100,15 +115,21 @@
       color: #334155;
       transition: transform 0.2s ease;
     }
+
     section li:hover {
-      transform: translateY(-2px); /* 마우스를 올리면 부드럽게 위로 살짝 들림 */
+      transform: translateY(-2px);
+      /* 마우스를 올리면 부드럽게 위로 살짝 들림 */
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     }
+
     section strong {
-      color: #1e1b4b; /* 프로젝트 제목 글자색 강조 */
+      color: #1e1b4b;
+      /* 프로젝트 제목 글자색 강조 */
       font-size: 1.1rem;
     }
-    section br + text, section li {
+
+    section br+text,
+    section li {
       font-size: 0.95rem;
     }
 
@@ -117,9 +138,11 @@
       color: #4f46e5;
       text-decoration: none;
       font-weight: bold;
-      border-bottom: 1px dashed #4f46e5; /* 링크 밑에 점선 효과 */
+      border-bottom: 1px dashed #4f46e5;
+      /* 링크 밑에 점선 효과 */
       padding-bottom: 2px;
     }
+
     section a:hover {
       color: #7c3aed;
       border-bottom: 1px solid #7c3aed;
@@ -134,41 +157,66 @@
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h1> Seung Jae LEE</h1>
-  <p class="subtitle">반갑습니다. </p>
-</header>
+  <header>
+    <h1> Seung Jae LEE</h1>
+    <p class="subtitle">반갑습니다. </p>
+  </header>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="portfolio.html">Portfolio</a>
-  <a href="contact.html">Contact</a>
-</nav>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 
-<main class="container">
-<section>
-  <h2>Portfolio</h2>
-  <p>프로젝트/과제 목록을 간단 설명과 함께 적어 주세요.</p>
-  <ol>
-    <li>
-      <strong>프로젝트 제목: (여기에 추가)</strong><br>
-      설명: (여기에 추가) — <a href="(깃허브 또는 배포 링크)">링크</a>
-    </li>
-    <li>
-      <strong>프로젝트 제목: (여기에 추가)</strong><br>
-      설명: (여기에 추가) — <a href="(깃허브 또는 배포 링크)">링크</a>
-    </li>
-  </ol>
-</section>
-</main>
+  <main class="container">
+    <section>
+      <h2>Portfolio</h2>
+      <p>프로젝트/과제 목록을 간단 설명과 함께 적어 주세요.</p>
+      <ol>
+        <li>
+          <strong>실습 1: D-Day 계산기</strong><br>
+          설명: Date 객체를 활용하여 D-Day를 계산합니다.
+          — <a href="dday.html">페이지 바로가기</a>
+        </li>
+        <li>
+          <strong>실습 2: 랜덤 뽑기</strong><br>
+          설명: String, Array, Math 객체를 조합한 랜덤 뽑기입니다.
+          — <a href="random.html">페이지 바로가기</a>
+        </li>
+        <li>
+          <strong>실습 3: 스타일 변환기</strong><br>
+          설명: DOM 객체의 style 프로퍼티를 이용해 디자인을 변경합니다.
+          - <a href="dom_style.html">페이지 바로가기</a>
+        </li>
+        <li>
+          <strong>실습 4: 댓글 추가삭제/</strong><br>
+          설명: 와createElement 를removeChild 이용한 동적 웹페이지입니다.
+          - <a href="dom_list.html">페이지 바로가기</a>
+        </li>
+        <li>
+          <strong>실습 5: 스마트 피자 주문서</strong><br>
+          설명: 수량 계산 및 onsubmit 제어 페이지( 이동 없음)
+          - <a href="event_order.html">페이지 바로가기</a>
+        </li>
+        <li>
+          <strong>실습 6: 키보드 자동차</strong><br>
+          설명: 키보드 이벤트와 화면 경계 체크 로직 구현
+          - <a href="event_car.html">페이지 바로가기</a>
+        </li>
 
-<footer>
-  <small>&copy; <span id="year"></span> 이름: 이승재</small>
-</footer>
+      </ol>
+    </section>
+  </main>
 
-<script src="script.js"></script>
+  <footer>
+    <small>&copy; <span id="year"></span> 이름: 이승재</small>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
+
 </html>

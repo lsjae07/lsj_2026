@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>인터넷활용 실습 템플릿</title>
-  
+
   <style>
     /* 1. 기본 여백 초기화 및 부드러운 글꼴 설정 */
     * {
@@ -12,25 +13,30 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Malgun Gothic', sans-serif;
-      background-color: #f0f2f5; /* 깔끔한 연회색 배경 */
+      background-color: #f0f2f5;
+      /* 깔끔한 연회색 배경 */
       color: #333333;
       line-height: 1.6;
     }
 
     /* 2. 상단 헤더 (이름 영역) */
     header {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed); /* 트렌디한 보라색 그라데이션 */
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      /* 트렌디한 보라색 그라데이션 */
       color: white;
       text-align: center;
       padding: 50px 20px;
     }
+
     header h1 {
       font-size: 2.5rem;
       letter-spacing: 2px;
       margin-bottom: 10px;
     }
+
     header .subtitle {
       font-size: 1.1rem;
       opacity: 0.85;
@@ -46,6 +52,7 @@
       top: 0;
       z-index: 100;
     }
+
     nav a {
       color: #4b5563;
       text-decoration: none;
@@ -53,6 +60,7 @@
       font-weight: bold;
       transition: all 0.2s ease;
     }
+
     nav a:hover {
       color: #4f46e5;
       background-color: #f3f4f6;
@@ -69,12 +77,16 @@
     section {
       background-color: #ffffff;
       padding: 35px;
-      border-radius: 16px; /* 모서리를 둥글게 */
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
+      border-radius: 16px;
+      /* 모서리를 둥글게 */
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+      /* 부드러운 그림자 */
     }
+
     section h2 {
       color: #1f2937;
-      border-left: 5px solid #4f46e5; /* 제목 왼쪽에 예쁜 보라색 세로선 추가 */
+      border-left: 5px solid #4f46e5;
+      /* 제목 왼쪽에 예쁜 보라색 세로선 추가 */
       padding-left: 12px;
       margin-bottom: 30px;
       font-size: 1.5rem;
@@ -82,20 +94,25 @@
 
     /* 6. 자바스크립트(document.write) 결과가 출력되는 글자 스타일 지정 */
     section h3 {
-      color: #4f46e5; /* D-Day 메시지를 강조하는 보라색 */
+      color: #4f46e5;
+      /* D-Day 메시지를 강조하는 보라색 */
       font-size: 1.35rem;
       margin: 18px 0;
-      text-align: center; /* 결과를 가운데로 정렬해서 보기 좋게 */
-      background-color: #eef2ff; /* 글자 뒤에 연한 배경 깔아주기 */
+      text-align: center;
+      /* 결과를 가운데로 정렬해서 보기 좋게 */
+      background-color: #eef2ff;
+      /* 글자 뒤에 연한 배경 깔아주기 */
       padding: 15px;
       border-radius: 8px;
     }
+
     section hr {
       border: 0;
       height: 1px;
       background-color: #e5e7eb;
       margin: 25px 0;
     }
+
     section p {
       color: #6b7280;
       font-size: 0.95rem;
@@ -112,73 +129,75 @@
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h1>Seung Jae LEE</h1>
-  <p class="subtitle">반갑습니다.</p>
-</header>
+  <header>
+    <h1>Seung Jae LEE</h1>
+    <p class="subtitle">반갑습니다.</p>
+  </header>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="portfolio.html">Portfolio</a>
-  <a href="contact.html">Contact</a>
-</nav>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 
-<main class="container">
-<section>
-  <h2>Date 객체 활용: D-Day 계산기</h2>
-  
-  <script>
-    // 1. 오늘 날짜 객체 생성
-    let now = new Date(); 
+  <main class="container">
+    <section>
+      <h2>Date 객체 활용: D-Day 계산기</h2>
 
-    // 2. prompt()로 사용자에게 연, 월, 일 입력받기
-    let year = prompt("목표 연도를 입력하세요 (예: 2025)", "2025");
-    let month = prompt("목표 월을 입력하세요 (1~12)", "12");
-    let day = prompt("목표 일을 입력하세요 (1~31)", "25");
+      <script>
+        // 1. 오늘 날짜 객체 생성
+        let now = new Date();
 
-    // 사용자가 '취소'를 누르거나 값을 입력하지 않은 경우
-    if (!year || !month || !day) {
-      document.write("<h3>D-Day 계산을 취소했습니다.</h3>");
-    } else {
-      // 3. 입력받은 값으로 목표 날짜 객체 생성
-      // Date 객체의 월은 0부터 시작(0=1월)하므로 입력값에서 1을 빼줍니다. 
-      let targetDate = new Date(year, month - 1, day); 
+        // 2. prompt()로 사용자에게 연, 월, 일 입력받기
+        let year = prompt("목표 연도를 입력하세요 (예: 2025)", "2025");
+        let month = prompt("목표 월을 입력하세요 (1~12)", "12");
+        let day = prompt("목표 일을 입력하세요 (1~31)", "25");
 
-      // 4. 날짜 차이 계산 (밀리초 단위)
-      // getTime() : 1970년 1월 1일부터 경과된 밀리초 반환 
-      let diffMs = targetDate.getTime() - now.getTime();
+        // 사용자가 '취소'를 누르거나 값을 입력하지 않은 경우
+        if (!year || !month || !day) {
+          document.write("<h3>D-Day 계산을 취소했습니다.</h3>");
+        } else {
+          // 3. 입력받은 값으로 목표 날짜 객체 생성
+          // Date 객체의 월은 0부터 시작(0=1월)하므로 입력값에서 1을 빼줍니다. 
+          let targetDate = new Date(year, month - 1, day);
 
-      // 5. 밀리초(ms)를 일(day) 단위로 변환
-      // Math.ceil()은 소수점 올림 (D-Day는 보통 당일을 포함하므로)
-      let diffDay = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+          // 4. 날짜 차이 계산 (밀리초 단위)
+          // getTime() : 1970년 1월 1일부터 경과된 밀리초 반환 
+          let diffMs = targetDate.getTime() - now.getTime();
 
-      // 6. document.write()로 결과 출력
-      document.write("<h3>목표 날짜: " + targetDate.toLocaleString() + "</h3>"); 
+          // 5. 밀리초(ms)를 일(day) 단위로 변환
+          // Math.ceil()은 소수점 올림 (D-Day는 보통 당일을 포함하므로)
+          let diffDay = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
 
-      if (diffDay === 0) {
-        document.write("<h3> D-Day 입니다!</h3>");
-      } else if (diffDay > 0) {
-        document.write("<h3> D-" + diffDay + "일 남았습니다.</h3>");
-      } else {
-        document.write("<h3> D+" + Math.abs(diffDay) + "일 지났습니다.</h3>"); 
-      }
+          // 6. document.write()로 결과 출력
+          document.write("<h3>목표 날짜: " + targetDate.toLocaleString() + "</h3>");
 
-      document.write("<hr>");
-      document.write("<p>오늘 날짜: " + now.toLocaleString() + "</p>");
-      document.write("<p><i>새로고침(F5)을 눌러 다시 계산할 수 있습니다.</i></p>");
-    }
-  </script>
+          if (diffDay === 0) {
+            document.write("<h3> D-Day 입니다!</h3>");
+          } else if (diffDay > 0) {
+            document.write("<h3> D-" + diffDay + "일 남았습니다.</h3>");
+          } else {
+            document.write("<h3> D+" + Math.abs(diffDay) + "일 지났습니다.</h3>");
+          }
 
-</section>
-</main>
+          document.write("<hr>");
+          document.write("<p>오늘 날짜: " + now.toLocaleString() + "</p>");
+          document.write("<p><i>새로고침(F5)을 눌러 다시 계산할 수 있습니다.</i></p>");
+        }
+      </script>
 
-<footer>
-  <small>&copy; <span id="year"></span> 이름: 이승재</small>
-</footer>
+    </section>
+  </main>
 
-<script src="script.js"></script>
+  <footer>
+    <small>&copy; <span id="year"></span> 이름: 이승재</small>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
+
 </html>
